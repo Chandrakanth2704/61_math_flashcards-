@@ -44,19 +44,20 @@ Each task must be completed using an iterative process involving LLM suggestions
 
 ### Task 1: Fix the string concatenation calculation bug
 
-Entering the mathematically correct answer is judged as incorrect by the game. In game_engine.compute_expected_answer(), the function returns int(f"{self.num_a}{self.num_b}") instead of evaluating the actual arithmetic operation. For example, 7 + 5 expects 75 rather than 12. Refactor compute_expected_answer() to check self.operator and compute the correct mathematical result using +, -, or *.
+Submitting the mathematically correct answer is rejected as incorrect because operands are joined together as text instead of being calculated. Ensure the game correctly evaluates the arithmetic problem according to its active operator.
 
 ### Task 2: Implement a per-question timer bar
 
-Flashcards are more engaging when speed is tested. Add a visible countdown timer bar (e.g., 10 seconds) below the card container in game_engine.render(). Update the timer in game_engine.update(), and if the time runs out before the player submits, automatically count the card as an incorrect attempt, display a "TIME'S UP!" warning, and move to the next card.
+Players currently have unlimited time to answer each flashcard. Add a visible countdown timer bar below the active card that tracks remaining time and automatically registers a missed attempt if time runs out before submission.
 
 ### Task 3: Implement consecutive correct streak multipliers
 
-Currently, every correct answer simply awards a flat +1 point. Implement a consecutive streak tracker in game_engine. Maintain a multiplier that increases for every consecutive correct response (e.g., 2x score for 3 in a row, 3x score for 5 in a row), and reset the streak counter to zero on any incorrect answer or timeout.
+Correct answers currently grant only a flat point increase regardless of player consistency. Introduce a streak multiplier that escalates score rewards for consecutive correct answers and resets back to baseline on any wrong answer or timeout.
 
-### Task 4: Implement division operator support with integer results
+### Task 4: Implement Division Operator with Clean Integer Quotients
 
-Flashcards only test addition, subtraction, and multiplication. Add the integer division operator (/) into game_engine.generate_new_card(). Ensure that cards generated with division always produce clean whole numbers without remainders (for example, by generating a divisor and quotient first, then multiplying them to produce the dividend).
+The flashcard pool only tests addition, subtraction, and multiplication. Add integer division into card generation, ensuring that every generated problem divides evenly with whole integer answers and no remainders.
+
 ---
 
 ## Expected Behavior
