@@ -39,8 +39,6 @@ class GameEngine:
 
     def compute_expected_answer(self):
         
-        # BUG SYMPTOM: 
-        # Operands are combined as strings instead of evaluated with mathematical operations.
         return int(f"{self.num_a}{self.num_b}")
 
     def submit_answer(self):
